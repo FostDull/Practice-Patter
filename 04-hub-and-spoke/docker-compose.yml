@@ -1,0 +1,16 @@
+services:
+  hub:
+    image: nicolaka/netshoot
+    command: sleep infinity
+    networks: [spoke-a, spoke-b]
+  app-a:
+    image: nicolaka/netshoot
+    command: sleep infinity
+    networks: [spoke-a]
+  app-b:
+    image: nicolaka/netshoot
+    command: sleep infinity
+    networks: [spoke-b]
+networks:
+  spoke-a:
+  spoke-b:
