@@ -1,9 +1,0 @@
-services:
-  inestable:
-    build: ./inestable
-  cliente:
-    build: ./cliente
-    ports:
-      - "8001:8000"
-    depends_on:
-      - inestable
