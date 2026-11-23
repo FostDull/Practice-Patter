@@ -1,0 +1,14 @@
+services:
+  api1:
+    build: ./api
+  api2:
+    build: ./api
+  api3:
+    build: ./api
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on: [api1, api2, api3]

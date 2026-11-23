@@ -1,0 +1,21 @@
+=== Evidencia de ejecución - 01-resiliencia ===
+Fecha: 2026-11-23
+
+$ docker compose up --build
+...
+cliente-1  | 2026-11-23 15:20:01 INFO Llamando al servicio inestable (timeout=2s)
+cliente-1  | 2026-11-23 15:20:01 INFO RETRY intento 1 – esperando...
+cliente-1  | 2026-11-23 15:20:02 INFO Llamando al servicio inestable (timeout=2s)
+cliente-1  | 2026-11-23 15:20:02 INFO RETRY intento 2 – esperando...
+cliente-1  | 2026-11-23 15:20:03 WARNING CIRCUITO ABIERTO → devolviendo fallback
+
+$ curl -s http://localhost:8001/consultar | jq
+{
+  "ok": false,
+  "fallback": true,
+  "mensaje": "Servicio temporalmente no disponible (circuit open)",
+  "estado_circuit": "open"
+}
+
+$ curl -s http://localhost:8001/estado
+{"circuit_state": "open"}
